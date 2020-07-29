@@ -1,9 +1,9 @@
-if [ -d ../usr/bin ];
+if [ -d ../../usr/bin ];
 then
 	if [ -d webScrap ];
 	then
 	        chmod +x *
-		cp webScrap ../usr/bin
+		cp webScrap ../../usr/bin
 		echo "[-] Process Completed [-]"
 		echo "[+] Now Give Command webScrap To Start Webscrap [+]"
 	else:
