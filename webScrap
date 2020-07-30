@@ -1,0 +1,78 @@
+#!/data/data/com.termux/files/usr/bin/python3
+import os
+from sys import *
+try:
+        open("results.txt")
+        #os.system("rm -r results.txt")
+except:
+        os.system("touch results.txt")
+result=open('results.txt','a')
+green="\033[1;32;40m"
+red="\033[1;31;40m"
+drk="\033[1;30;40m"
+white="\033[1;37;40m"
+usage=f"{red}[?] Arguments Missing [?]\n\n{green}Usage : {white} webScrap url\n\n{red}Example : {white} webScrap https://www.example.com"
+if (len(argv) != 2):
+        print(usage)
+        exit(0)
+try:
+        from bs4 import *
+except:
+        print(f"{red} bs4 Module Not Found !!! \nNow Installing...")
+        os.system('pip3 install bs4')
+        os.system('clear')
+        print(f"{white}Now Restart Program")
+        exit(0)
+import threading
+try:
+        from requests import *
+except:
+        print(f"{red} Requests Module Not Found !!! \nNow Installing...")
+        os.system('pip3 install requests')
+        os.system('clear')
+        print(f"{white}Now Restart Program")
+        exit(0)
+ur=argv[1]
+if ur=="-h":
+        print(usage)
+        exit(0)
+if 'http' not in ur:
+        if 'www' not in ur:
+                ur=f'www.{ur}'
+                ur=f"https://{ur}"
+                #print(ur)
+        else:
+                ur=f"https://{ur}"
+                #print(ur)
+'''print(ur)
+exit(0)'''
+try:
+        url=get(ur)
+except:
+        exit(0)
+cont=url.content
+soup=BeautifulSoup(cont,'html.parser')
+anc = soup.find_all('a')
+#print(anc.string)
+all_links = set()
+
+def full(link):
+        try:
+                link.get('href')
+        except:
+                exit(0)
+        if link.get('href')!="#":
+                if 'http' not in link.get('href'):
+                        link1 = f"https://{ur}{link.get('href')}"
+                        all_links.add(link1)
+                        result.write(link1)
+                else:
+                        wr=link.get('href')
+                        all_links.add(wr)
+for link in anc:
+        thread= threading.Thread(target=full,args=(link,))
+        thread.start()
+final=list(all_links)
+final='\n'.join(final)
+print(f"{green}{final}")
+result.write(final+"\n")
