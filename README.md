@@ -19,3 +19,10 @@
 <br>
 <p>After Scraping Urls From Page , You Can Use Recursion Method To Get Urls From The Urls That You Got In Last Scan<p>
 <h3>How To Use Recursion Method?</h3>
+<h4>Give The Following Commands</h4>
+<br>
+<p>recursiveScrap<p>
+<h3>recursiveScrap Will Go To All The Scraped Urls From Their Source Code And Will Do It Recursively<h3>
+<br>
+<h3>Made By Indian<br>Made In India<br>Made For The World</h3>
+
