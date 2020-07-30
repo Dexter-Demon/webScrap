@@ -1,0 +1,8 @@
+f=open("results.txt")
+try:
+        for link in f:
+                import os
+                cmd=f"webScrap {link}"
+                os.system(cmd)
+except KeyboardInterrupt:
+        exit()
